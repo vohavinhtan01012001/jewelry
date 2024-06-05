@@ -17,11 +17,11 @@ function App() {
           path: "/login",
           element: <Login />,
         },
+        {
+          path: "/auctions",
+          element: <BidRegister />,
+        },
       ],
-    },
-    {
-      path: "/auctions",
-      element: <BidRegister />,
     },
   ]);
   return <RouterProvider router={router} />;
