@@ -1,0 +1,48 @@
+
+    .footer{
+
+    
+
+    .footer__icon{
+       display: flex;
+       justify-content: center;
+       gap: 20px;
+       width: 100vw;
+       margin-top: 20px;
+      
+   
+      
+      
+    }
+
+    .footer__title{
+        h1{
+            font-size: 1.1em ;
+            font-weight: 300;
+            text-align: center;
+            margin-top: 20px;
+            background-color: black;
+            color: aliceblue;
+
+        }
+       
+    }
+
+.icon__facebook,
+.icon__youtube,
+.icon__instagram,
+.icon__twitter {
+  font-size: 2em; 
+  color: white; 
+  transition: transform 0.3s; 
+}
+
+.icon__facebook:hover,
+.icon__youtube:hover,
+.icon__instagram:hover,
+.icon__twitter:hover {
+  transform: scale(1.2); /* Tăng kích thước khi di chuột qua */
+}
+
+
+    }

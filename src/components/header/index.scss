@@ -1,0 +1,29 @@
+.header{
+    
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 100px;
+
+  position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    backdrop-filter: blur(3.5px);
+
+    &__nav{
+        ul{
+            display: flex;
+            list-style: none;
+            gap: 15px;
+
+            li{
+                font-size: 14px;
+                font-weight: 600;
+                
+            }
+        }
+    }
+    
+}

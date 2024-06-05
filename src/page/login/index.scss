@@ -1,0 +1,101 @@
+.login{
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+position: relative;
+ overflow: hidden;
+
+   .wrapper{
+
+z-index: 100000000;
+display: flex;
+align-items: center;
+   }
+
+   &__logo{
+      padding-right: 250px;
+   }
+
+   &__form{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-left: 2px solid rgba(241,241,241,2);
+      padding-left: 250px;
+      padding-top: 80px;
+      padding-bottom: 80px;
+
+     
+   }
+
+ 
+
+ 
+
+ 
+   &__video{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      transform: scale(1.4);
+   }
+
+   h3{
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      
+   }
+
+   button{
+ 
+      background-color: rgba(0, 0, 0, 0.15);
+      font-weight: 600;
+      padding: 5px;
+      border-radius: 5px;
+      color: white;
+
+      &.active{
+         background-color: black;
+      }
+     
+
+      
+
+   }
+   input{
+      padding: 5px;
+      border-radius: 5px;
+      width: 100%;
+
+      &:hover{
+         background-color: #dedede;
+      }
+   }
+
+   .back{
+      text-align: center;
+      font-weight: 500;
+   }
+
+   .input__password{
+      display: flex;
+     align-items: center;
+     position: relative;
+     width: 100%; 
+     }
+
+     .input__password .icon{
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+     
+  
+   }
+}
