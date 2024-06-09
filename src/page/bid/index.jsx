@@ -1,7 +1,7 @@
 import "./index.scss";
 
 function BidRegister() {
-  return <div className="bid">dsadsa</div>;
+  return <div className="bid"></div>;
 }
 
 export default BidRegister;

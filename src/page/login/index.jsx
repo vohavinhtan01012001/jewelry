@@ -6,32 +6,27 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get(
-        `https://662a6bda67df268010a3dc8f.mockapi.io/StaffManagement`
+      const response = await axios.post(
+        `https://jewerly-api.azurewebsites.net/api/User/login?username=${username}&password=${password}`
       );
+      console.log("Response data:", response.data);
 
-      const user = response.data.find(
-        (user) => user.email === email && user.password === password
-      );
-
-      if (user) {
+      if (response.data && response.data.data && response.data.data.status) {
         console.log("Login successful!");
         navigate("/auctions");
       } else {
-        // Hiển thị thông báo lỗi nếu email hoặc mật khẩu không chính xác
-        setError("Email or password is incorectly.");
+        setError("Username or password is incorrect.");
       }
     } catch (error) {
-      // Xử lý lỗi nếu có
       console.error("Error logging in:", error);
-      setError("Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại sau.");
+      setError("An error occurred while logging in. Please try again later.");
     }
   };
 
@@ -50,10 +45,10 @@ function Login() {
         <div className="login__form">
           <h3>Login to your account</h3>
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
           />
           <div className="input__password">
             <input
@@ -65,9 +60,9 @@ function Login() {
           </div>
           {error && <p className="error-message">{error}</p>}
           <button
-            className={`login-button ${email && password ? "active" : ""}`}
+            className={`login-button ${username && password ? "active" : ""}`}
             onClick={handleLogin}
-            disabled={!email || !password}
+            disabled={!username || !password}
           >
             Login
           </button>

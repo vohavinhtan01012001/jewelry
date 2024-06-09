@@ -10,6 +10,8 @@ import "./index.scss";
 
 // import required modules
 import { Autoplay, Pagination } from "swiper/modules";
+import { Col, Row } from "antd";
+import { Link } from "react-router-dom";
 
 export default function Carousel() {
   return (
@@ -42,6 +44,24 @@ export default function Carousel() {
           />
         </SwiperSlide>
       </Swiper>
+      <Row>
+        <Col span={6}>
+          THE LEADING BOUTIQUE JEWELRY AND WATCH AUCTION HOUSE
+          <button>
+            <Link to="/">LEARN MORE ABOUT US</Link>
+          </button>
+        </Col>
+        <Col span={6}>
+          <Link to="/form-sign">BUYING AT AUTION</Link>
+        </Col>
+        <Col span={6}>
+          <Link to="/">SCHEDULE A PREVIEW</Link>
+        </Col>
+        <Col span={6}>
+          <Link to="/">SELLING AT AUCTION</Link>
+        </Col>
+      </Row>
+      .
     </>
   );
 }

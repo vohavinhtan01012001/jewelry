@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./index.scss";
 import logo from "../../images/logo.png";
+import { UserOutlined } from "@ant-design/icons";
 
 function Header() {
   return (
@@ -26,10 +27,12 @@ function Header() {
             <Link to="/">EXOLORE</Link>
           </li>
           <li>
-            <Link to="/">ABOUT</Link>
+            <Link to="/">CONTACT</Link>
           </li>
           <li>
-            <Link to="/">CONTACT</Link>
+            <Link to="/login">
+              <UserOutlined />
+            </Link>
           </li>
         </ul>
       </nav>
