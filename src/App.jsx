@@ -6,8 +6,10 @@ import BidRegister from "./page/bid";
 import FormSign from "./page/form-sign";
 import SendToCustomer from "./page/send-to-customer";
 import ApproveAuctionRequest from "./page/approved";
-import AuctionRequestByStatus from "./page/get-auction-req-by-status";
+
 import GetAllRequestByRequestId from "./page/get-all-request-by-requestId";
+import AuctionRequestByStatus from "./page/get-auction-req-by-status";
+import JewelryManagement from "./page/jewelry-management";
 function App() {
   const router = createBrowserRouter([
     {
@@ -45,6 +47,10 @@ function App() {
         {
           path: "/requests/:requestId",
           element: <GetAllRequestByRequestId />,
+        },
+        {
+          path: "/jewelry-management",
+          element: <JewelryManagement />,
         },
       ],
     },

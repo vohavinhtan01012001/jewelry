@@ -1,0 +1,27 @@
+/* index.scss */
+
+.get-all-request {
+    padding: 20px;
+  }
+  
+  .request-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .request-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .request-item p {
+    margin: 5px 0;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  

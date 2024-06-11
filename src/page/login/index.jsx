@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -14,16 +14,16 @@ function Login() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        `https://jewerly-api.azurewebsites.net/api/User/login?username=${username}&password=${password}`
+        `https://jewerly-api.azurewebsites.net/api/User/login?email=${email}&password=${password}`
       );
       console.log("Response data:", response.data);
 
       if (response.data && response.data.data && response.data.data.status) {
         console.log("Login successful!");
-        localStorage.setItem("token", response.data.data.token);
+
         navigate("/auctions");
       } else {
-        setError("Username or password is incorrect.");
+        setError("Email or password is incorrect.");
       }
     } catch (error) {
       console.error("Error logging in:", error);
@@ -47,9 +47,9 @@ function Login() {
           <h3>Login to your account</h3>
           <input
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            placeholder="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <div className="input__password">
             <input
@@ -61,9 +61,9 @@ function Login() {
           </div>
           {error && <p className="error-message">{error}</p>}
           <button
-            className={`login-button ${username && password ? "active" : ""}`}
+            className={`login-button ${email && password ? "active" : ""}`}
             onClick={handleLogin}
-            disabled={!username || !password}
+            disabled={!email || !password}
           >
             Login
           </button>
