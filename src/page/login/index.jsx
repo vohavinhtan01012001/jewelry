@@ -20,6 +20,7 @@ function Login() {
 
       if (response.data && response.data.data && response.data.data.status) {
         console.log("Login successful!");
+        localStorage.setItem("token", response.data.data.token);
         navigate("/auctions");
       } else {
         setError("Username or password is incorrect.");

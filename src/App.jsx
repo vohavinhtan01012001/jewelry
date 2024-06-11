@@ -4,6 +4,10 @@ import Layout from "./components/layout";
 import HomePage from "./page/home";
 import BidRegister from "./page/bid";
 import FormSign from "./page/form-sign";
+import SendToCustomer from "./page/send-to-customer";
+import ApproveAuctionRequest from "./page/approved";
+import AuctionRequestByStatus from "./page/get-auction-req-by-status";
+import GetAllRequestByRequestId from "./page/get-all-request-by-requestId";
 function App() {
   const router = createBrowserRouter([
     {
@@ -25,6 +29,22 @@ function App() {
         {
           path: "/form-sign",
           element: <FormSign />,
+        },
+        {
+          path: "/send-to-customer",
+          element: <SendToCustomer />,
+        },
+        {
+          path: "/approved",
+          element: <ApproveAuctionRequest />,
+        },
+        {
+          path: "/auction-requests/:status",
+          element: <AuctionRequestByStatus />,
+        },
+        {
+          path: "/requests/:requestId",
+          element: <GetAllRequestByRequestId />,
         },
       ],
     },
