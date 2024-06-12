@@ -4,13 +4,19 @@ import Layout from "./components/layout";
 import HomePage from "./page/home";
 import BidRegister from "./page/bid";
 import FormSign from "./page/form-sign";
-import SendToCustomer from "./page/send-to-customer";
-import ApproveAuctionRequest from "./page/approved";
+import Selling from "./page/selling/Selling";
+import Requirements from "./page/admin/staff/Requirements";
+import { useEffect, useState } from "react";
 
-import GetAllRequestByRequestId from "./page/get-all-request-by-requestId";
-import AuctionRequestByStatus from "./page/get-auction-req-by-status";
-import JewelryManagement from "./page/jewelry-management";
 function App() {
+  const [role, setRole] = useState(2)
+
+  useEffect(() => {
+    const userJsonString = localStorage.getItem('user');
+    if (userJsonString !== null) {
+      setRole(JSON.parse(userJsonString)?.userRoleId)
+    }
+  }, [localStorage.getItem('user')])
   const router = createBrowserRouter([
     {
       path: "/",
@@ -33,24 +39,12 @@ function App() {
           element: <FormSign />,
         },
         {
-          path: "/send-to-customer",
-          element: <SendToCustomer />,
+          path: "/selling",
+          element: <Selling />,
         },
         {
-          path: "/approved",
-          element: <ApproveAuctionRequest />,
-        },
-        {
-          path: "/auction-requests/:status",
-          element: <AuctionRequestByStatus />,
-        },
-        {
-          path: "/requests/:requestId",
-          element: <GetAllRequestByRequestId />,
-        },
-        {
-          path: "/jewelry-management",
-          element: <JewelryManagement />,
+          path: "/requirements",
+          element: role === 3 ? <Requirements /> :  <HomePage />,
         },
       ],
     },

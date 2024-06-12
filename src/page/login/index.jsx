@@ -16,12 +16,12 @@ function Login() {
       const response = await axios.post(
         `https://jewerly-api.azurewebsites.net/api/User/login?email=${email}&password=${password}`
       );
-      console.log("Response data:", response.data);
-
       if (response.data && response.data.data && response.data.data.status) {
-        console.log("Login successful!");
-
+        console.log(response)
+        localStorage.setItem("user", JSON.stringify(response.data.data))
+        console.log(response.data)
         navigate("/auctions");
+        window.location.reload();
       } else {
         setError("Email or password is incorrect.");
       }
