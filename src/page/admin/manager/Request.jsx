@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
-import CreateProductDialog from "./components/CreateProductDialog";
-import { Table } from "antd";
-import { CheckOutlined, CloseOutlined, SnippetsOutlined } from "@ant-design/icons";
-import { API } from "../../Api";
-import DetailData from "./components/DetailData";
+import { CheckOutlined, CloseOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { Table } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { API } from '../../../Api';
+import DetailData from './components/DetailData';
+import FindValueDialog from './components/FindValueDialog';
 
-export default function Selling() {
-    const [open, setOpen] = useState(false);
+export default function Request() {
     const [dataJewelry, setDataJewelry] = useState([])
+    const [open, setOpen] = useState(false)
     const [dataDetail, setDataDetail] = useState()
-    const [openDetail, setOpenDetail] = useState(false)
+    const [showPrevalueDialog, setShowPrevalueDialog] = useState(false)
+    const [dataJewelryPrevalue, setDataJewelryPrevalue] = useState()
     const getData = async () => {
         try {
             const res = await API({
                 method: 'GET',
-                url: `AuctionRequest/get-auction-request-by-status/3`,
+                url: `AuctionRequest/get-auction-request-by-status/1`,
             })
             if (res.data.data) {
                 setDataJewelry(res.data.data)
@@ -78,37 +79,24 @@ export default function Selling() {
 
     const handleShowDetail = (record) => {
         const data = dataJewelry.find(item => item.jewelryId === record.jewelryId)
-        const detailData = { ...record, finalValue: data.finalValue }
-        setOpenDetail(true);
+        const detailData = { ...record, prevalue: data.prevalue }
+        setOpen(true);
         setDataDetail(detailData);
     }
 
     const handleOk = async (record) => {
-        try {
-            const data = dataJewelry.find(item => item.jewelryId === record.jewelryId)
-            await API({
-                method: 'POST',
-                url: `AuctionRequest/approved?requestId=${data.requestId}`,
-            })
-            getData();
-        } catch (error) {
-            console.log(error)
-        }
+        const data = dataJewelry.find(item => item.jewelryId === record.jewelryId)
+        setShowPrevalueDialog(true)
+        setDataJewelryPrevalue(data)
     }
-    return (
-        <div className="w-full text-center">
-            <button onClick={() => setOpen(true)} className="border px-2 py-2 rounded bg-red-500 text-white mb-[20px]">Request A Valuation</button>
 
-            <div className="w-[1200px] mx-auto">
-                <Table columns={columns} dataSource={dataJewelry.map(item => {
-                    return item.jewelry
-                })} pagination={{ pageSize: 6 }} />
-            </div>
-            <DetailData open={openDetail} setOpen={setOpenDetail} data={dataDetail} />
-            <CreateProductDialog
-                open={open}
-                setOpen={setOpen}
-            />
+    return (
+        <div className='w-[1200px] h-full mx-auto'>
+            <Table columns={columns} dataSource={dataJewelry.map(item => {
+                return item.jewelry
+            })} pagination={{ pageSize: 6 }} />
+            <DetailData open={open} setOpen={setOpen} data={dataDetail} />
+            <FindValueDialog open={showPrevalueDialog} setOpen={setShowPrevalueDialog} data={dataJewelryPrevalue} getData={getData} />
         </div>
     )
 }

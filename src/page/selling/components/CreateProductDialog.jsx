@@ -5,35 +5,32 @@ import { API } from '../../../Api';
 const CreateProductDialog = ({ open, setOpen }) => {
     const [form, setForm] = useState()
     const [categoryId, setCategoryId] = useState()
-    const [image, setImage] = useState()
 
     const handleOk = async () => {
-        setForm({ ...form, categoryId: categoryId, image: 'string', jewelryId: 1 })
+        const data = { ...form, categoryId: categoryId, jewelryId: 1 }
         try {
-            const res = await API({
+            await API({
                 method: 'post',
                 url: `Auction/request-auction`,
                 data: {
                     userId: JSON.parse(localStorage.getItem('user')).userId,
                     jewelry: {
-                        ...form
+                        ...data
                     }
                 },
                 // headers: { 'Content-Type': 'multipart/form-data' }
             })
-            console.log(res)
+            handleCancel();
         } catch (error) {
             console.log(error)
         }
-
-
     }
 
-    const onChangeFile = (e) => {
-        if (e.target.files) {
-            setImage(e.target.files[0])
-        }
-    }
+    // const onChangeFile = (e) => {
+    //     if (e.target.files) {
+    //         setImage(e.target.files[0])
+    //     }
+    // }
 
 
     const onChangeForm = (e) => {
@@ -59,31 +56,23 @@ const CreateProductDialog = ({ open, setOpen }) => {
                     </div>
                     <div>
                         <label>extraMaterialCost</label>
-                        <Input name="extraMaterialCost" onChange={onChangeForm} />
+                        <Input name="extraMaterialCost" onChange={onChangeForm} type="number" />
                     </div>
                     <div>
                         <label>extraGemCost</label>
-                        <Input name="extraGemCost" onChange={onChangeForm} />
+                        <Input name="extraGemCost" onChange={onChangeForm} type="number" />
                     </div>
                     <div>
                         <label>productionCost</label>
-                        <Input name="productionCost" onChange={onChangeForm} />
-                    </div>
-                    <div>
-                        <label>productionCost</label>
-                        <Input name="productionCost" onChange={onChangeForm} />
+                        <Input name="productionCost" onChange={onChangeForm} type="number" />
                     </div>
                     <div>
                         <label>auctionEstimate</label>
-                        <Input name="auctionEstimate" onChange={onChangeForm} />
+                        <Input name="auctionEstimate" onChange={onChangeForm} type="number" />
                     </div>
                     <div>
                         <label>weight</label>
-                        <Input name="weight" onChange={onChangeForm} />
-                    </div>
-                    <div>
-                        <label>auctionEstimate</label>
-                        <Input name="auctionEstimate" onChange={onChangeForm} />
+                        <Input name="weight" onChange={onChangeForm} type='number' />
                     </div>
                     <div>
                         <label>description</label>
@@ -111,7 +100,7 @@ const CreateProductDialog = ({ open, setOpen }) => {
                     </div>
                     <div>
                         <label>gemCarat</label>
-                        <Input name="gemCarat" onChange={onChangeForm} />
+                        <Input name="gemCarat" onChange={onChangeForm} type="number" />
                     </div>
                     <div>
                         <label>materialName</label>
@@ -138,8 +127,12 @@ const CreateProductDialog = ({ open, setOpen }) => {
                             ]}
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <input type='file' onChange={onChangeFile} />
+                    </div> */}
+                    <div>
+                        <label>image</label>
+                        <Input name="image" onChange={onChangeForm} />
                     </div>
                 </div>
             </Modal>

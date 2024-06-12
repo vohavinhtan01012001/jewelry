@@ -16,8 +16,7 @@ function Login() {
       const response = await axios.post(
         `https://jewerly-api.azurewebsites.net/api/User/login?email=${email}&password=${password}`
       );
-      if (response.data && response.data.data && response.data.data.status) {
-        console.log(response)
+      if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data.data))
         console.log(response.data)
         navigate("/auctions");

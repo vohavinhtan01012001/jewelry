@@ -1,28 +1,30 @@
-import { Space, Table } from 'antd';
+import { Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { API } from '../../../Api';
 import { CheckOutlined, CloseOutlined, SnippetsOutlined } from '@ant-design/icons';
 import DetailData from './components/DetailData';
+import PrevalueDialog from './components/PrevalueDialog';
 
 
 const Requirements = () => {
     const [dataJewelry, setDataJewelry] = useState([])
     const [open, setOpen] = useState(false)
     const [dataDetail, setDataDetail] = useState()
+    const [dataJewelryPrevalue, setDataJewelryPrevalue] = useState()
+    const [showPrevalueDialog, setShowPrevalueDialog] = useState(false)
 
     const getData = async () => {
         try {
             const res = await API({
-                method: 'get',
-                url: `Auction/get-all-request-auction`,
+                method: 'GET',
+                url: `AuctionRequest/get-auction-request-by-status/0`,
             })
             if (res.data.data) {
-                setDataJewelry(res.data.data.map(item => {
-                    return item.jewelry
-                }))
+                setDataJewelry(res.data.data)
             }
         } catch (error) { console.log(error) }
     }
+
     useEffect(() => {
         getData()
     }, [])
@@ -36,8 +38,24 @@ const Requirements = () => {
 
     }
 
-    const handleOk = (record) => {
+    const handleOk = async (record) => {
+        const data = dataJewelry.find(item => item.jewelryId === record.jewelryId)
+        setShowPrevalueDialog(true)
+        setDataJewelryPrevalue(data)
+        // try {
+        //     const data = dataJewelry.find(item => item.jewelryId === record.jewelryId)
+        //     const res = await API({
+        //         method: 'POST',
+        //         url: "AuctionRequest/update-prevalue",
+        //         data: {
+        //             requestId: data.requestId,
+        //             prevalue: data.prevalue,
+        //             userId: data.userId
+        //         }
+        //     })
+        // } catch (error) {
 
+        // }
     }
 
     const columns = [
@@ -45,7 +63,7 @@ const Requirements = () => {
             title: 'Image',
             dataIndex: 'image',
             key: 'image',
-            render: (text) => <img src={'https://www.fortunaauction.com/wp-content/uploads/2018/05/Art-Deco-Cartier-Emerald-Bracelet-1024x683.jpg'} alt="Jewelry Image" style={{ width: 50, height: 50 }} />,
+            render: (text) => <img src={text} alt="Jewelry Image" style={{ width: 50, height: 50 }} />,
         },
         {
             title: 'Jewelry Brand',
@@ -92,8 +110,11 @@ const Requirements = () => {
     ];
     return (
         <div className='w-[1200px] h-full mx-auto'>
-            <Table columns={columns} dataSource={dataJewelry} pagination={{ pageSize: 6 }} />
+            <Table columns={columns} dataSource={dataJewelry.map(item => {
+                return item.jewelry
+            })} pagination={{ pageSize: 6 }} />
             <DetailData open={open} setOpen={setOpen} data={dataDetail} />
+            <PrevalueDialog open={showPrevalueDialog} setOpen={setShowPrevalueDialog} data={dataJewelryPrevalue} getData={getData} />
         </div>
     )
 }

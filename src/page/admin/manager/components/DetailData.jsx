@@ -3,15 +3,12 @@ import { Button, Modal, Table } from 'antd';
 
 const DetailData = ({ open, setOpen, data }) => {
 
-    const handleOk = () => {
-        console.log(data)
-    };
 
     const handleCancel = () => {
         setOpen(false);
     };
 
-  
+
 
     return (
         <>
@@ -96,6 +93,10 @@ const DetailData = ({ open, setOpen, data }) => {
                     <div>
                         <label>Jewelry ID: </label>
                         <span>{data?.jewelryId}</span>
+                    </div>
+                    <div className='font-semibold'>
+                        <label>prevalue: </label>
+                        <span>{data?.prevalue}</span>
                     </div>
                     <div>
                         <label>Image: </label>

@@ -13,7 +13,7 @@ function Header() {
       setRole(JSON.parse(userJsonString)?.userRoleId)
     }
   }, [localStorage.getItem('user')])
-  
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -58,7 +58,18 @@ function Header() {
                   </Link>
                 </li>
               </ul>
-              : ""
+              : role === 5 ?
+                <ul>
+                  <li>
+                    <Link to="/request">request processing</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">
+                      <UserOutlined />
+                    </Link>
+                  </li>
+                </ul>
+                : ""
         }
       </nav>
     </header>

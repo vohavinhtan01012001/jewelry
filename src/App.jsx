@@ -7,6 +7,7 @@ import FormSign from "./page/form-sign";
 import Selling from "./page/selling/Selling";
 import Requirements from "./page/admin/staff/Requirements";
 import { useEffect, useState } from "react";
+import Request from "./page/admin/manager/Request";
 
 function App() {
   const [role, setRole] = useState(2)
@@ -44,7 +45,11 @@ function App() {
         },
         {
           path: "/requirements",
-          element: role === 3 ? <Requirements /> :  <HomePage />,
+          element: role === 3 ? <Requirements /> : <HomePage />,
+        },
+        {
+          path: "/request",
+          element: role === 5 ? <Request /> : <HomePage />,
         },
       ],
     },
